@@ -8,7 +8,6 @@ import { DataService } from '../data.service'; // Adjust the path as needed
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  userId: number;
   user: any;
 
   constructor(
@@ -18,8 +17,8 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.userId = +params['id'];
-      this.dataService.getUserById(this.userId).subscribe(user => {
+      const userId = +params['id']; // Get the user ID from the route parameter
+      this.dataService.getUserById(userId).subscribe(user => {
         this.user = user;
       });
     });
