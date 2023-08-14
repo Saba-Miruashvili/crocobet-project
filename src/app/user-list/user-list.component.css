@@ -1,0 +1,3 @@
+button {
+  transition: transform 0.15s ease-in-out; /* Smooth transition during animation */
+}
