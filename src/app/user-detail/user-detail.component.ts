@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../data.service'; // Adjust the path as needed
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -8,7 +8,9 @@ import { DataService } from '../data.service'; // Adjust the path as needed
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
+  userId: number = 0;
   user: any;
+  posts: any[] = []; // Declare the posts property here
 
   constructor(
     private route: ActivatedRoute,
@@ -17,9 +19,14 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const userId = +params['id']; // Get the user ID from the route parameter
-      this.dataService.getUserById(userId).subscribe(user => {
+      this.userId = +params['id'];
+      this.dataService.getUserById(this.userId).subscribe(user => {
         this.user = user;
+      });
+
+      // Fetch user's posts
+      this.dataService.getUserPosts(this.userId).subscribe(posts => {
+        this.posts = posts;
       });
     });
   }

@@ -2,5 +2,10 @@
   <h2>User Detail</h2>
   <p>Name: {{ user?.name }}</p>
   <p>Email: {{ user?.email }}</p>
-  <!-- Add more user details as needed -->
+  <h3>Posts:</h3>
+  <ul>
+    <li *ngFor="let post of posts">
+      {{ post.title }}
+    </li>
+  </ul>
 </div>
